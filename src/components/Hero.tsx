@@ -1,6 +1,6 @@
 import { Sparkles, ArrowRight, PlayCircle } from 'lucide-react';
 
-const Hero = () => {
+const Hero = ({ onStart }: { onStart: () => void }) => {
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
       {/* Background blobs */}
@@ -24,7 +24,7 @@ const Hero = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <button className="btn-primary flex items-center justify-center gap-2">
+          <button onClick={onStart} className="btn-primary flex items-center justify-center gap-2">
             Get Your Free Report <ArrowRight className="w-5 h-5" />
           </button>
           <button className="btn-secondary flex items-center justify-center gap-2">

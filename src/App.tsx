@@ -1,21 +1,79 @@
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import CareerCards from './components/CareerCards';
 import Process from './components/Process';
 import Testimonials from './components/Testimonials';
-import { CheckCircle2, ChevronRight } from 'lucide-react';
+import Assessment from './components/Assessment';
+import { CheckCircle2, ChevronRight, X } from 'lucide-react';
 
 function App() {
+  const [showAssessment, setShowAssessment] = useState(false);
+  const [assessmentResult, setAssessmentResult] = useState<any>(null);
+
+  const handleAssessmentComplete = (results: any) => {
+    console.log('Assessment Results:', results);
+    setAssessmentResult(results);
+    // You could save this to Supabase here
+  };
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
+      <Navbar onStart={() => setShowAssessment(true)} />
       
       <main>
-        <Hero />
+        <Hero onStart={() => setShowAssessment(true)} />
         
         <CareerCards />
 
         <Process />
+
+        {/* Assessment Modal */}
+        <AnimatePresence>
+          {showAssessment && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+              <div 
+                className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                onClick={() => setShowAssessment(false)}
+              />
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                className="relative z-10 w-full max-w-2xl"
+              >
+                <button 
+                  onClick={() => setShowAssessment(false)}
+                  className="absolute -top-12 right-0 p-2 text-white hover:text-primary-200 transition-colors"
+                >
+                  <X className="w-8 h-8" />
+                </button>
+                {assessmentResult ? (
+                  <div className="bg-white p-12 rounded-3xl text-center shadow-2xl">
+                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <CheckCircle2 className="w-10 h-10 text-green-600" />
+                    </div>
+                    <h2 className="text-3xl font-bold mb-4">Assessment Complete!</h2>
+                    <p className="text-gray-600 mb-8 leading-relaxed">
+                      Based on your interest in <span className="font-bold text-primary">{assessmentResult.interests}</span> and your <span className="font-bold text-primary">{assessmentResult.personality}</span> work style, we're preparing your personalized career roadmap.
+                    </p>
+                    <button 
+                      onClick={() => {
+                        setShowAssessment(false);
+                        setAssessmentResult(null);
+                      }}
+                      className="btn-primary w-full"
+                    >
+                      Back to Home
+                    </button>
+                  </div>
+                ) : (
+                  <Assessment onComplete={handleAssessmentComplete} />
+                )}
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
 
         {/* Features Section */}
         <section className="py-24">

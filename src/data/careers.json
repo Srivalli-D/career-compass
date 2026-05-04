@@ -1,0 +1,58 @@
+{
+  "careers": [
+    {
+      "id": "tech-software",
+      "title": "Technology & Software",
+      "description": "Build the future with code and innovative digital solutions.",
+      "category": "tech",
+      "salary": "$80k - $180k",
+      "demand": "High",
+      "color": "blue"
+    },
+    {
+      "id": "creative-design",
+      "title": "Creative & Design",
+      "description": "Express your vision through visual storytelling and UX.",
+      "category": "design",
+      "salary": "$60k - $150k",
+      "demand": "Medium",
+      "color": "pink"
+    },
+    {
+      "id": "business-finance",
+      "title": "Business & Finance",
+      "description": "Master markets, strategy, and organizational growth.",
+      "category": "business",
+      "salary": "$70k - $250k",
+      "demand": "High",
+      "color": "green"
+    },
+    {
+      "id": "healthcare-science",
+      "title": "Healthcare & Science",
+      "description": "Make a difference through research and patient care.",
+      "category": "science",
+      "salary": "$90k - $300k",
+      "demand": "Very High",
+      "color": "red"
+    },
+    {
+      "id": "energy-sustainability",
+      "title": "Energy & Sustainability",
+      "description": "Create solutions for a greener and cleaner planet.",
+      "category": "energy",
+      "salary": "$65k - $160k",
+      "demand": "Growing",
+      "color": "yellow"
+    },
+    {
+      "id": "social-global",
+      "title": "Social & Global",
+      "description": "Drive impact through policy, education, and advocacy.",
+      "category": "social",
+      "salary": "$50k - $120k",
+      "demand": "Medium",
+      "color": "purple"
+    }
+  ]
+}

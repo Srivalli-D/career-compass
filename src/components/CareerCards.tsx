@@ -1,43 +1,23 @@
 import { Code, Palette, BarChart3, Heart, Zap, Globe } from 'lucide-react';
+import careerData from '../data/careers.json';
 
-const careers = [
-  {
-    title: 'Technology & Software',
-    description: 'Build the future with code and innovative digital solutions.',
-    icon: Code,
-    color: 'bg-blue-50 text-blue-600',
-  },
-  {
-    title: 'Creative & Design',
-    description: 'Express your vision through visual storytelling and UX.',
-    icon: Palette,
-    color: 'bg-pink-50 text-pink-600',
-  },
-  {
-    title: 'Business & Finance',
-    description: 'Master markets, strategy, and organizational growth.',
-    icon: BarChart3,
-    color: 'bg-green-50 text-green-600',
-  },
-  {
-    title: 'Healthcare & Science',
-    description: 'Make a difference through research and patient care.',
-    icon: Heart,
-    color: 'bg-red-50 text-red-600',
-  },
-  {
-    title: 'Energy & Sustainability',
-    description: 'Create solutions for a greener and cleaner planet.',
-    icon: Zap,
-    color: 'bg-yellow-50 text-yellow-600',
-  },
-  {
-    title: 'Social & Global',
-    description: 'Drive impact through policy, education, and advocacy.',
-    icon: Globe,
-    color: 'bg-purple-50 text-purple-600',
-  },
-];
+const iconMap: Record<string, any> = {
+  'tech-software': Code,
+  'creative-design': Palette,
+  'business-finance': BarChart3,
+  'healthcare-science': Heart,
+  'energy-sustainability': Zap,
+  'social-global': Globe,
+};
+
+const colorMap: Record<string, string> = {
+  blue: 'bg-blue-50 text-blue-600',
+  pink: 'bg-pink-50 text-pink-600',
+  green: 'bg-green-50 text-green-600',
+  red: 'bg-red-50 text-red-600',
+  yellow: 'bg-yellow-50 text-yellow-600',
+  purple: 'bg-purple-50 text-purple-600',
+};
 
 const CareerCards = () => {
   return (
@@ -53,22 +33,35 @@ const CareerCards = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {careers.map((career, idx) => (
-            <div 
-              key={idx}
-              className="group p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer"
-            >
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${career.color}`}>
-                <career.icon className="w-6 h-6" />
+          {careerData.careers.map((career) => {
+            const Icon = iconMap[career.id] || Globe;
+            const colorClass = colorMap[career.color] || 'bg-gray-50 text-gray-600';
+            
+            return (
+              <div 
+                key={career.id}
+                className="group p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer"
+              >
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${colorClass}`}>
+                  <Icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
+                  {career.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  {career.description}
+                </p>
+                <div className="flex justify-between items-center pt-4 border-t border-gray-50 text-sm">
+                  <span className="font-medium text-gray-500">Salary: {career.salary}</span>
+                  <span className={`px-2 py-1 rounded-md text-xs font-bold ${
+                    career.demand === 'High' || career.demand === 'Very High' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'
+                  }`}>
+                    {career.demand}
+                  </span>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
-                {career.title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                {career.description}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

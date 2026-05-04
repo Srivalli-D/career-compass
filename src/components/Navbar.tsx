@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Compass, Menu, X } from 'lucide-react';
 
-const Navbar = () => {
+const Navbar = ({ onStart }: { onStart: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -19,7 +19,7 @@ const Navbar = () => {
             <a href="#features" className="text-gray-600 hover:text-primary transition-colors font-medium">Features</a>
             <a href="#how-it-works" className="text-gray-600 hover:text-primary transition-colors font-medium">How it works</a>
             <a href="#testimonials" className="text-gray-600 hover:text-primary transition-colors font-medium">Success Stories</a>
-            <button className="btn-primary">Start Free Test</button>
+            <button onClick={onStart} className="btn-primary">Start Free Test</button>
           </div>
 
           <div className="md:hidden">
