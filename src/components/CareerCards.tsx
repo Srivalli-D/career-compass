@@ -1,4 +1,3 @@
-import React from 'react';
 import { Code, Palette, BarChart3, Heart, Zap, Globe } from 'lucide-react';
 
 const careers = [
